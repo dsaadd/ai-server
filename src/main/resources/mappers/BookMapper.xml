@@ -1,0 +1,24 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.server.mapper.BookMapper">
+
+    <update id="tuiZu">
+        update book set member_id=null,status=0 where id=#{id}
+    </update>
+
+    <update id="updatestock">
+        update book set stock=stock-1 where id=#{id}
+    </update>
+    <select id="selectbook" resultType="java.lang.Integer">
+        select bookid from `book-user` where id=#{id}
+    </select>
+    <select id="selectByIdBook" resultType="com.ai.server.beans.Book">
+        select *from book where id=#{id}
+    </select>
+    <insert id="insertBookUser">
+       insert into `book-user` (id,bookid)
+       values(#{id},#{bookid})
+   </insert>
+
+</mapper>
