@@ -142,13 +142,23 @@ public class BookController {
             }
         }
     }
-    @RequestMapping("updateStatus1")
-    public Result delstock(@RequestBody Book book){
-        Integer id = book.getId();
-        bookService.updatestock(id);
-        memberService.insert(id,book.getMember_id());
-        return Result.success("借阅成功");
 
+    @RequestMapping("updateStatus1")
+    public Result delstock(@RequestBody Book book) {
+        int count = 0;
+        Integer id = book.getId();
+        List<Integer> selectbook = bookService.selectbook(book.getMember_id());
+        for (int bookid : selectbook
+        ) {
+            if (bookid == id) {
+                count += 1;
+            }
+        }
+        if (count == 0) {
+            bookService.updatestock(id);
+            memberService.insertBookUser(id, book.getMember_id());
+            return Result.success("借阅成功");
+        } else return Result.error("您已经借阅了此书了");
     }
     /**
      *  更新房源状态
@@ -159,6 +169,7 @@ public class BookController {
         if("0".equals(book.getStatus())){
             book.setMember_id("");
         }
+        System.out.println("书的id为"+book.getId());
         int b = bookService.tuiZu(book.getId());
         if(b>0){
             return Result.success();
@@ -167,7 +178,7 @@ public class BookController {
         }
     }
 
-    /**
+    /**s
      * @return
      */
     @Operation(summary = "根据书名模糊查询分页", description = "根据书名模糊查询分页") // 方法级注解

@@ -24,7 +24,12 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements IB
 
     @Override
     public int tuiZu(int id) {
-        return bookMapper.tuiZu(id);
+        // 先更新book表
+        bookMapper.updateBookAfterReturn(id);
+        // 再删除借阅记录
+        bookMapper.deleteBorrowRecord(id);
+        // 无论删除是否成功，只要更新了图书状态就算成功
+        return 1;
     }
 
     @Override

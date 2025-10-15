@@ -20,7 +20,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Members> implem
     private BookMapper bookMapper;
 
     @Override
-    public int insert(Integer id, String memberId) {
+    public int insertBookUser(Integer id, String memberId) {
         return bookMapper.insertBookUser(memberId,id);
     }
 }

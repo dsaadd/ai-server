@@ -20,6 +20,7 @@ public class Book {
     private String status;
     private String del;
     private Integer stock;
+    private String des;
 
     @TableField(value = "member_id")
     private String member_id;  //外键
@@ -38,7 +39,8 @@ public class Book {
                 ", photos='" + photos + '\'' +
                 ", status='" + status + '\'' +
                 ", del='" + del + '\'' +
-                ", stock='" + stock + '\'' +
+                ", stock=" + stock +
+                ", des='" + des + '\'' +
                 ", member_id='" + member_id + '\'' +
                 '}';
     }
@@ -109,5 +111,13 @@ public class Book {
 
     public void setDel(String del) {
         this.del = del;
+    }
+
+    public String getDes() {
+        return des;
+    }
+
+    public void setDes(String des) {
+        this.des = des;
     }
 }

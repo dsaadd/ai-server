@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IMemberService extends IService<Members> {
 
-    int insert(Integer id, String memberId);
+
+    int insertBookUser(Integer id, String memberId);
 }
 
