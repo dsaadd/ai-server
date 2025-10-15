@@ -4,7 +4,11 @@
 <mapper namespace="com.ai.server.mapper.BookMapper">
 
     <update id="tuiZu">
-        update book set member_id=null,status=0 where id=#{id}
+        <!-- 更新book表，清空member_id并恢复库存 -->
+        update book set member_id='', stock=stock+1 where id=#{id};
+
+        <!-- 删除book-user表中的借阅记录 -->
+        delete from `book-user` where bookid=#{id};
     </update>
 
     <update id="updatestock">
